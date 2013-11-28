@@ -1,6 +1,4 @@
-Not A Fractal
+RelayChains
 =============
-A limited, innacurate subset of Everything
-
-Not A Fractal is a clone of Nested in C#: http://orteil.dashnet.org/nested 
+A simple text Markov Chain implementation with configurable window size mostly useful for chatterbots. 
 
