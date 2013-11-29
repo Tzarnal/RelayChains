@@ -6,7 +6,7 @@
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{E29CB4C6-331E-4094-9E16-166B470E7B28}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>RelayChains</RootNamespace>
     <AssemblyName>RelayChains</AssemblyName>
@@ -51,7 +51,7 @@
     <Compile Include="RelayChains\Chain.cs" />
     <Compile Include="RelayChains\ChainKey.cs" />
     <Compile Include="RelayChains\ChainLink.cs" />
-    <Compile Include="RelayChains\TextTools.cs" />
+    <Compile Include="RelayChains\TextSanitizer.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

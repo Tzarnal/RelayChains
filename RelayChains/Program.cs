@@ -9,23 +9,25 @@ namespace RelayChains
         
         static void Main(string[] args)
         {
-            _chain = new Chain(3);
+            _chain = new Chain(4);
             IKnowKungFu();
 
-            _chain.Learn("There are now more details on how details are toxic to the lunar setting design space.");
+           /* _chain.Learn("There are now more details on how details are toxic to the lunar setting design space.");
             _chain.Learn("There are now more details on how solars are bland");
             _chain.Learn("There are now more details on how solars are exciting.");
             _chain.Learn("Its agreed that solars are bland because of they are not infernal enough.");
-            _chain.Learn("Your Moon Is On Fire!");
+            _chain.Learn("Your Moon Is On Fire!");*/
 
             
-
             //_chain.PrintAssociations();
+
+
+            Console.WriteLine("Finished Building Brain");
 
             while(true)
             {
 
-                Console.WriteLine(">" + TextTools.FixInputEnds(_chain.GenerateSentenceFromSentence(Console.ReadLine())));
+                Console.WriteLine(">" + TextSanitizer.FixInputEnds(_chain.GenerateSentenceFromSentence(Console.ReadLine())));
             }
             
         }
@@ -36,7 +38,7 @@ namespace RelayChains
             string line;
             while ((line = file.ReadLine()) != null)
             {
-                _chain.Learn(TextTools.SanitizeInput(line));
+                _chain.Learn(TextSanitizer.SanitizeInput(line));
             }
 
             file.Close();
@@ -44,7 +46,7 @@ namespace RelayChains
             file = new System.IO.StreamReader("Braaaains.txt");
             while ((line = file.ReadLine()) != null)
             {
-                _chain.Learn(TextTools.SanitizeInput(line));
+                _chain.Learn(TextSanitizer.SanitizeInput(line));
             }
 
             file.Close();

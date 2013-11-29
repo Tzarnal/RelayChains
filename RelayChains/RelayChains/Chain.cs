@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 
+
 namespace RelayChains
-{
+{    
     public class Chain
-    {
-        private Dictionary<ChainKey, ChainLink> _chain = new Dictionary<ChainKey, ChainLink>();
-        private Random _random = new Random();
+    {        
+        private Dictionary<ChainKey, ChainLink> _chain = new Dictionary<ChainKey, ChainLink>();        
+        private Random _random = new Random();        
         private int _windowSize;
 
         public Chain(int windowSize)
@@ -66,13 +67,13 @@ namespace RelayChains
         public string GenerateWordFromSentence(string sentence)
         {
             
-            var relvantWord = TextTools.FindRelevantWordInSentence(sentence);
+            var relvantWord = FindRelevantWordInSentence(sentence);
 
             var candidates = _chain.Where(c => c.Key.FirstWord == relvantWord).ToArray();
             
             if (candidates.Length > 0)
             {
-                var radomCandidate = candidates[(new Random()).Next(0, candidates.Length)].Key;
+                var radomCandidate = candidates[_random.Next(0, candidates.Length)].Key;
                 return radomCandidate[1];    
             }
 
@@ -83,17 +84,16 @@ namespace RelayChains
         //Attempt to generate a sentence from a given word.
         public string GenerateSentenceFromWord(string word, int minLength = 8, int maxLength = 25)
         {
-            var rand = new Random();
             ChainKey currentCandidate;
             var sentence = "";
             string nextWord;
-            var sentenceLength = rand.Next(minLength, maxLength);
+            var sentenceLength = _random.Next(minLength, maxLength);
             var candidates = _chain.Where(c => c.Key.FirstWord == word).ToArray();            
             var currentKeyParts = new string[_windowSize];
             
             if (candidates.Length > 0)
             {
-                currentCandidate = candidates[rand.Next(0, candidates.Length)].Key;                
+                currentCandidate = candidates[_random.Next(0, candidates.Length)].Key;                
                 for (var i = 0; i < _windowSize; i++)
                 {
                     currentKeyParts[i] = currentCandidate[i];
@@ -124,7 +124,7 @@ namespace RelayChains
                 {
                     break;   
                 }
-                currentCandidate = candidates[rand.Next(0, candidates.Length)].Key;
+                currentCandidate = candidates[_random.Next(0, candidates.Length)].Key;
                 sentenceLength--;
 
             } while (nextWord != null && sentenceLength > 0);
@@ -136,6 +136,19 @@ namespace RelayChains
         public string GenerateSentenceFromSentence(string sentence, int minLength = 8, int maxLength = 25)
         {
             return GenerateSentenceFromWord(GenerateWordFromSentence(sentence), minLength, maxLength);
+        }
+
+        private string FindRelevantWordInSentence(string sentence)
+        {
+            if (string.IsNullOrWhiteSpace(sentence))
+                return null;
+
+            string[] chunks = sentence.Split(' ');
+            var sortedChunks = from c in chunks
+                               orderby c.Length descending
+                               select c;
+
+            return sortedChunks.First();
         }
     }
 }

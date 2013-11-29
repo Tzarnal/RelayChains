@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace RelayChains
-{
+{    
     class ChainKey
     {
+        
         private string[] _entries;
 
         public string this[int index]    // Indexer declaration
@@ -33,7 +33,7 @@ namespace RelayChains
         {
             _entries = content.ToArray();            
         }
-
+        
         new public string ToString()
         {
             return String.Join("", _entries);

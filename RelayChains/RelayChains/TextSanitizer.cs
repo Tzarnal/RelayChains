@@ -4,31 +4,20 @@ using System.Text.RegularExpressions;
 
 namespace RelayChains
 {
-    public class TextTools
+    public class TextSanitizer
     {
-
-        public static string FindRelevantWordInSentence(string sentence)
-        {
-            if (string.IsNullOrWhiteSpace(sentence))
-                return null;
-            
-            string[] chunks = sentence.Split(' ');
-            var sortedChunks = from c in chunks
-                               orderby c.Length descending
-                               select c;
-
-            return sortedChunks.First();
-        }
 
         public static string SanitizeInput(string input)
         {
             if (string.IsNullOrWhiteSpace(input))
                 return null;
-            
-            input = StripExtranousSymbols(input);
+
             input = RemoveUrls(input);
+            input = StripExtranousSymbols(input);            
             input = FixMiscelanious(input);
-            return FixInputEnds(input);
+            input = FixInputEnds(input);
+            
+            return input;
         }
 
         public static string StripExtranousSymbols(string input)
@@ -36,7 +25,7 @@ namespace RelayChains
             if (string.IsNullOrWhiteSpace(input))
                 return null;
 
-            input = Regex.Replace(input, @"[,()&:;]", String.Empty); //remove most extranous symbols
+            input = Regex.Replace(input, @"[,()&:;']", String.Empty); //remove most extranous symbols
             input = Regex.Replace(input, "[\"]", String.Empty); //remove " too
             return input;
         }
@@ -46,7 +35,7 @@ namespace RelayChains
             if (string.IsNullOrWhiteSpace(input))
                 return null;
 
-            input = Regex.Replace(input, @"(https?|ftp|file)\://[A-Za-z0-9\.\-]+(/[A-Za-z0-9\?\&\=;\+!'\(\)\*\-\._~%]*)*", ""); //Remove urls
+            input = Regex.Replace(input, @"(?i)\b((?:[a-z][\w-]+:(?:/{1,3}|[a-z0-9%])|www\d{0,3}[.]|[a-z0-9.\-]+[.][a-z]{2,4}/)(?:[^\s()<>]+|\(([^\s()<>]+|(\([^\s()<>]+\)))*\))+(?:\(([^\s()<>]+|(\([^\s()<>]+\)))*\)|[^\s`!()\[\]{};:'"".,<>?«»“”‘’]))", ""); //Remove urls
             
             return input;
         }

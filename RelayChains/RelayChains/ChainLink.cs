@@ -4,10 +4,11 @@ using System.Linq;
 
 
 namespace RelayChains
-{
+{    
     public class ChainLink
-    {
+    {        
         private Dictionary<string, int>  links = new Dictionary<string, int>();
+        
         private Random random = new Random();
 
         //Adds a word to the link or increases the weight of a word that is already included
