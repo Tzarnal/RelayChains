@@ -62,19 +62,23 @@ namespace RelayChains
             }
         }
 
-        //Generate a word from a sentence, selecting most relevant word and trying to make a sentence
-        //returns null if it cannot generate a word from the most relevant word
+        //Generate a word from a sentence, selecting most relevant word
         public string GenerateWordFromSentence(string sentence)
         {
             
-            var relvantWord = FindRelevantWordInSentence(sentence);
+            var relevantWord = FindRelevantWordInSentence(sentence);
 
-            var candidates = _chain.Where(c => c.Key.FirstWord == relvantWord).ToArray();
+            var candidates = _chain.Where(c => c.Key.FirstWord == relevantWord).ToArray();
             
             if (candidates.Length > 0)
             {
+                candidates = _chain.Where(c => c.Key.ToString().Contains(relevantWord)).ToArray();
+            }
+
+            if (candidates.Length > 0)
+            {
                 var radomCandidate = candidates[_random.Next(0, candidates.Length)].Key;
-                return radomCandidate[1];    
+                return radomCandidate[1];
             }
 
             return "";
