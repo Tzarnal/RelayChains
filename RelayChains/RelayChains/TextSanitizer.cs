@@ -25,7 +25,7 @@ namespace RelayChains
             if (string.IsNullOrWhiteSpace(input))
                 return null;
 
-            input = Regex.Replace(input, @"[,()&:;']", String.Empty); //remove most extranous symbols
+            input = Regex.Replace(input, @"[,()&:;]", String.Empty); //remove most extranous symbols
             input = Regex.Replace(input, "[\"]", String.Empty); //remove " too
             return input;
         }
