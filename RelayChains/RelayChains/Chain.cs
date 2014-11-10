@@ -56,7 +56,7 @@ namespace RelayChains
         public void WriteAssociations(string path="report.txt")
         {
             var file = new StreamWriter(path);
-            Console.WriteLine("Writing associations to: " + path);
+            Console.WriteLine(">Writing associations to: " + path);
             
             foreach (var pair in _chain)
             {
@@ -64,7 +64,7 @@ namespace RelayChains
                 file.Write(pair.Value.Report());                                
             }
             
-            Console.WriteLine("Finished writing to: " + path);
+            Console.WriteLine(">Finished writing to: " + path);
         }
 
         //Generate a word from a sentence, selecting most relevant word

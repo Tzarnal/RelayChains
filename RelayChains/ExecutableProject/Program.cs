@@ -9,25 +9,35 @@ namespace ExecutableProject
 
         static void Main(string[] args)
         {
-            _chain = new Chain(4);
+            _chain = new Chain(3);
             IKnowKungFu();
 
-            /* _chain.Learn("There are now more details on how details are toxic to the lunar setting design space.");
-             _chain.Learn("There are now more details on how solars are bland");
-             _chain.Learn("There are now more details on how solars are exciting.");
-             _chain.Learn("Its agreed that solars are bland because of they are not infernal enough.");
-             _chain.Learn("Your Moon Is On Fire!");*/
-
-
-            //_chain.PrintAssociations();
-
-
-            Console.WriteLine("Finished Building Brain");
-
+            Console.WriteLine("> Finished Building Brain");
+            Console.WriteLine();
+                                            
             while (true)
             {
+                var input = Console.ReadLine();
+                
+                if (input == "report")
+                {
+                    _chain.WriteAssociations();
+                    Console.WriteLine();
+                    continue;
+                }
 
-                Console.WriteLine(">" + TextSanitizer.FixInputEnds(_chain.GenerateSentenceFromSentence(Console.ReadLine())));
+                var response = _chain.GenerateSentenceFromSentence(input);
+
+                if (string.IsNullOrWhiteSpace(response))
+                {
+                    Console.WriteLine("> Empty Reponse");
+                }
+                else
+                {
+                    Console.WriteLine(">" + TextSanitizer.FixInputEnds(response));    
+                }
+
+                Console.WriteLine();
             }
 
         }
