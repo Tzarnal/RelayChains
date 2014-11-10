@@ -128,7 +128,7 @@ namespace RelayChains
                 currentKeyParts[_windowSize - 1] = nextWord;
 
                 //Grab next candidate 
-                candidates = _chain.Where(c => c.Key.ToString() == string.Join("",currentKeyParts)).ToArray();                
+                candidates = _chain.Where(c => c.Key.ToString() == string.Join("·", currentKeyParts)).ToArray();                
                 if (candidates.Count() == 0)
                 {
                     break;   
