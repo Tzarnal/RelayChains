@@ -36,7 +36,7 @@ namespace RelayChains
         
         new public string ToString()
         {
-            return String.Join("", _entries);
+            return String.Join("·", _entries);
         }
     }
 }
