@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 
 
@@ -50,16 +51,20 @@ namespace RelayChains
             }
         }
 
-        //Prints out a list of keys and the assciated words and weights.
-        public void PrintAssociations()
+       
+        //write a list of keys and the assciated words and weights to a file
+        public void WriteAssociations(string path="report.txt")
         {
+            var file = new StreamWriter(path);
+            Console.WriteLine("Writing associations to: " + path);
+            
             foreach (var pair in _chain)
             {
-                Console.WriteLine("--{0}",pair.Key.ToString());
-                pair.Value.Print();
-                Console.WriteLine();
-
+                file.WriteLine(pair.Key.ToString());
+                file.Write(pair.Value.Report());                                
             }
+            
+            Console.WriteLine("Finished writing to: " + path);
         }
 
         //Generate a word from a sentence, selecting most relevant word

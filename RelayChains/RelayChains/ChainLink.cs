@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 
 namespace RelayChains
@@ -57,13 +58,16 @@ namespace RelayChains
         }
 
         //Prints the words in the link with their relative weights
-        public void Print()
+        public string Report()
         {
+            var report = new StringBuilder();
+            
             foreach (KeyValuePair<string, int> entry in links)
             {
-                Console.WriteLine("\t" + entry.Key + " - " + entry.Value);
+                report.AppendFormat("\t {0} - {1}\n", entry.Key, entry.Value);
             }
-            
+
+            return report.ToString();
         }
     }
 }
