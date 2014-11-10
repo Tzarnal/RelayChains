@@ -30,7 +30,13 @@ namespace ExecutableProject
 
                 if (string.IsNullOrWhiteSpace(response))
                 {
-                    Console.WriteLine("> Empty Reponse");
+                    response = _chain.GenerateRandomSentence();
+                    if (string.IsNullOrWhiteSpace(response))
+                    {
+                        Console.WriteLine("> No response possible");
+                    }
+
+                    Console.WriteLine(">" + TextSanitizer.FixInputEnds(response));    
                 }
                 else
                 {

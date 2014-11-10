@@ -90,6 +90,19 @@ namespace RelayChains
 
         }
 
+        //Generate a setnence at random
+        public string GenerateRandomSentence(int minLength = 8, int maxLength = 25)
+        {
+            var word = GenerateRandomStartingWord();
+            
+            if (!string.IsNullOrWhiteSpace(word))
+            {
+                return GenerateSentenceFromWord(word, minLength, maxLength);    
+            }
+            
+            return "";
+        }
+
         //Attempt to generate a sentence from a given word.
         public string GenerateSentenceFromWord(string word, int minLength = 8, int maxLength = 25)
         {
@@ -145,6 +158,19 @@ namespace RelayChains
         public string GenerateSentenceFromSentence(string sentence, int minLength = 8, int maxLength = 25)
         {
             return GenerateSentenceFromWord(GenerateWordFromSentence(sentence), minLength, maxLength);
+        }
+
+        //Randomly picks a word from the chain to use as a sentence seed.
+        private string GenerateRandomStartingWord()
+        {
+            if (_chain.Count > 0)
+            {
+                var randomEntry = _chain.ElementAt(_random.Next(0, _chain.Count));
+
+                return randomEntry.Key.FirstWord;    
+            }
+
+            return "";
         }
 
         private string FindRelevantWordInSentence(string sentence)
