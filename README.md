@@ -16,4 +16,5 @@ chain.Learn(TextSanitizer.SanitizeInput("Have no place being stored or can trip 
 Console.WriteLine(chain.GenerateSentenceFromSentence("Generate a sentence from a full sentence."));
 Console.WriteLine(chain.GenerateSentenceFromWord("OrASingleWord"));
 Console.WriteLine(chain.GenerateWordFromSentence("Generate a single word from a sentence"));
+Console.WriteLine(chain.GenerateRandomSentence()); //You don't need an input sentence, RelayChains can start from nothing.
 ```
